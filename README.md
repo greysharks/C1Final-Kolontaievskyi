@@ -1,8 +1,6 @@
 ##########################################################################
-## Copyright (C) 2026 by Maksym Kolontaievskyi
-## Redistribution, modification or use of this software in source or binary
-## forms is permitted as long as the files maintain this copyright.
-## Maksym Kolontaievskyi is not liable for any misuse of this material. 
+## Copyright (C) 2026 by Maksym Kolontaievskyi 
+## Redistribution, modification or use of this software in source or binary forms is permitted as long as the files maintain this copyright. Maksym Kolontaievskyi is not liable for any misuse of this material. 
 ##########################################################################
 
 
