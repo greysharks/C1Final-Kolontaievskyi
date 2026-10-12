@@ -5,17 +5,24 @@
  * forms is permitted as long as the files maintain this copyright. Users are 
  * permitted to modify this and use it to learn about the field of embedded
  * software. Alex Fosdick and the University of Colorado are not liable for any
- * misuse of this material. 
+ * misuse of this material.
  *
  *****************************************************************************/
 /**
- * @file <Add File Name> 
- * @brief <Add Brief Description Here >
+ * @file stats.c
+ * @brief C program that does statistics analysis on data set.
  *
- * <Add Extended Description Here>
+ * This program prints mean, median, maximum and minimum values
+ * of a given array (with a given length) by first sorting this array,
+ * then getting mean, median, maximum and minimum from sorted data set.
+ * Program also prints sorted array before printing result of satistical
+ * analysis.
  *
- * @author <Add FirsName LastName>
- * @date <Add date >
+ * NOTE: For time optimization reasons the sorting function will replace
+ * original array with sorted version instead of working with a copy.
+ *
+ * @author Maksym Kolontaievskyi
+ * @date 12.10.2026
  *
  */
 
