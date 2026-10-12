@@ -119,7 +119,7 @@ void sort_array(unsigned char *array, const unsigned int LENGTH);
  *
  * Given an array of data and a length,
  * this function sorts the array using
- * a merge sort algorithm where the first
+ * a quick sort algorithm where the first
  * element will become a largest value
  * inside the array and the last element
  * will become the smallest value.
