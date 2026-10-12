@@ -19,7 +19,6 @@
  *
  */
 
-
 #include <math.h>
 #include <stdio.h>
 #include "stats.h"
@@ -67,7 +66,47 @@ unsigned char find_median(const unsigned char *array, const unsigned int LENGTH)
 unsigned char find_mean(const unsigned char *array, const unsigned int LENGTH) {}
 unsigned char find_maximum(const unsigned char *array, const unsigned int LENGTH) {}
 unsigned char find_minimum(const unsigned char *array, const unsigned int LENGTH) {}
+
 void sort_array(unsigned char *array, const unsigned int LENGTH) {
-  
+  void quick_sort(unsigned int start, unsigned int end) {
+    if (start == end) {
+      return;
+    }
+
+    unsigned int pivot = end;
+    unsigned int index = start;
+
+    while (pivot - 1 != index) {
+      if (array[index] < array[pivot]) {
+        // swap array[pivot - 1] and array[pivot]
+        array[pivot - 1] = array[pivot - 1] ^ array[pivot];
+        array[pivot] = array[pivot - 1] ^ array[pivot];
+        array[pivot - 1] = array[pivot - 1] ^ array[pivot];
+
+        // swap array[pivot] and array[index]
+        array[pivot] = array[pivot] ^ array[index];
+        array[index] = array[pivot] ^ array[index];
+        array[pivot] = array[pivot] ^ array[index];
+      }
+
+      else {
+        index++;
+      }
+    }
+
+    if (array[index] < array[pivot]) {
+      // swap array[index] and array[pivot]
+      array[index] = array[index] ^ array[pivot];
+      array[pivot] = array[index] ^ array[pivot];
+      array[index] = array[index] ^ array[pivot];
+    }
+
+    index++;
+
+    quick_sort(start, index - 1);
+    quick_sort(pivot, end);
+  }
+
+  quick_sort(0, LENGTH - 1);
 }
 
