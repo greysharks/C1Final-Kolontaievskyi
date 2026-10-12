@@ -36,14 +36,17 @@ void main() {
 
   /* Other Variable Declarations Go Here */
   /* Statistics and Printing Functions Go Here */
-  print_array(test, SIZE);
-  sort_array(test, SIZE);
-  print_array(test, SIZE);
+  print_statistics(test, SIZE);
 }
 
 /* Add other Implementation File Code Here */
 
-void print_statistics(const unsigned char *array, const unsigned int LENGTH) {}
+void print_statistics(unsigned char *array, const unsigned int LENGTH) {
+  printf("Sorted array:");
+  sort_array(array, LENGTH);
+  print_array(array, LENGTH);
+  printf("\n\nHas following statistics:\n\tMinimum: %d\n\tMaximum: %d\n\tMedian: %d\n", find_minimum(array, LENGTH), find_maximum(array, LENGTH), find_median(array, LENGTH));
+}
 
 void print_array(const unsigned char *array, const unsigned int LENGTH) {
   // suppose the array's length is NxN,
@@ -57,15 +60,33 @@ void print_array(const unsigned char *array, const unsigned int LENGTH) {
     }
     printf("%d\t", array[i]);
   }
-
-  // start new line before returning to console
-  printf("\n");
 }
 
-unsigned char find_median(const unsigned char *array, const unsigned int LENGTH) {}
-unsigned char find_mean(const unsigned char *array, const unsigned int LENGTH) {}
-unsigned char find_maximum(const unsigned char *array, const unsigned int LENGTH) {}
-unsigned char find_minimum(const unsigned char *array, const unsigned int LENGTH) {}
+unsigned char find_median(const unsigned char *array, const unsigned int LENGTH) {
+  // assuming the array is sorted from largest to smallest
+  unsigned int index_of_middle = LENGTH / 2;
+
+  if (LENGTH % 2 == 1) {
+    return array[index_of_middle];
+  }
+
+  return roundf((array[index_of_middle] + array[index_of_middle - 1]) / 2.0);
+}
+
+unsigned char find_mean(const unsigned char *array, const unsigned int LENGTH) {
+  // assuming the array is sorted from largest to smallest
+  return 0;
+}
+
+unsigned char find_maximum(const unsigned char *array, const unsigned int LENGTH) {
+  // assuming the array is sorted from largest to smallest
+  return array[0];
+}
+
+unsigned char find_minimum(const unsigned char *array, const unsigned int LENGTH) {
+  // assuming the array is sorted from largest to smallest
+  return array[LENGTH - 1];
+}
 
 void sort_array(unsigned char *array, const unsigned int LENGTH) {
   void quick_sort(unsigned int start, unsigned int end) {

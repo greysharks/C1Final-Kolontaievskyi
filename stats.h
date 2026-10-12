@@ -23,7 +23,7 @@
 
 /* Add Your Declarations and Function Comments here */
 
-void print_statistics(const unsigned char *array, const unsigned int LENGTH);
+void print_statistics(unsigned char *array, const unsigned int LENGTH);
 
 /*
  * @brief Prints the statistics of an array.
@@ -61,7 +61,9 @@ unsigned char find_median(const unsigned char *array, const unsigned int LENGTH)
  * @brief Finds the median value.
  *
  * Given a sorted array of data and its length,
- * returns the median value.
+ * returns the median value (when data set is
+ * even, the median value is rounded to the
+ * nearest integer).
  *
  * @param array An array of data.
  * @param LENGTH Length of a given array.
