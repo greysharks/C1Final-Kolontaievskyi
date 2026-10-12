@@ -5,17 +5,30 @@
  * forms is permitted as long as the files maintain this copyright. Users are 
  * permitted to modify this and use it to learn about the field of embedded
  * software. Alex Fosdick and the University of Colorado are not liable for any
- * misuse of this material. 
+ * misuse of this material.
  *
  *****************************************************************************/
 /**
- * @file <Add File Name> 
- * @brief <Add Brief Description Here >
+ * @file stats.h
+ * @brief Header file for statistics analysis functions.
  *
- * <Add Extended Description Here>
+ * First part of functions inside this file is meant for printing
+ * information:
+ *   - print_array() that prints given array in form of NxN matrix
+ *   - print_statistcs() that prints statistics of the sorted data set.
  *
- * @author <Add FirsName LastName>
- * @date <Add date >
+ * Second part of functions inside this file is meant for calculating
+ * statistics values on a sorted array:
+ *   - find_maximum() finds maximum value inside data set
+ *   - find_minimum() finds minimum value inside data set
+ *   - find_mean() calculates mean value for the data set
+ *   - find_medain() calculates median value for the data set.
+ *
+ * Lastly, there is sort_array() function that is reponsible for sorting
+ * data set from largest to smallest value.
+ *
+ * @author Maksym Kolontaievskyi
+ * @date 12.10.2026
  *
  */
 #ifndef __STATS_H__
