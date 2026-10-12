@@ -20,7 +20,7 @@
  */
 
 
-
+#include <math.h>
 #include <stdio.h>
 #include "stats.h"
 
@@ -37,15 +37,37 @@ void main() {
 
   /* Other Variable Declarations Go Here */
   /* Statistics and Printing Functions Go Here */
+  print_array(test, SIZE);
+  sort_array(test, SIZE);
+  print_array(test, SIZE);
 }
 
 /* Add other Implementation File Code Here */
 
 void print_statistics(const unsigned char *array, const unsigned int LENGTH) {}
-void print_array(const unsigned char *array, const unsigned int LENGTH) {}
+
+void print_array(const unsigned char *array, const unsigned int LENGTH) {
+  // suppose the array's length is NxN,
+  // then N is both number of rows and number of columns
+  const unsigned int N = (unsigned int) sqrt((float) LENGTH);
+
+  for (unsigned int i = 0; i < LENGTH; i++) {
+    // use N as separator for rows
+    if (i % N == 0) {
+      printf("\n");
+    }
+    printf("%d\t", array[i]);
+  }
+
+  // start new line before returning to console
+  printf("\n");
+}
+
 unsigned char find_median(const unsigned char *array, const unsigned int LENGTH) {}
 unsigned char find_mean(const unsigned char *array, const unsigned int LENGTH) {}
 unsigned char find_maximum(const unsigned char *array, const unsigned int LENGTH) {}
 unsigned char find_minimum(const unsigned char *array, const unsigned int LENGTH) {}
-void sort_array(unsigned char *array, const unsigned int LENGTH) {}
+void sort_array(unsigned char *array, const unsigned int LENGTH) {
+  
+}
 
