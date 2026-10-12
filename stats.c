@@ -45,7 +45,8 @@ void print_statistics(unsigned char *array, const unsigned int LENGTH) {
   printf("Sorted array:");
   sort_array(array, LENGTH);
   print_array(array, LENGTH);
-  printf("\n\nHas following statistics:\n\tMinimum: %d\n\tMaximum: %d\n\tMedian: %d\n", find_minimum(array, LENGTH), find_maximum(array, LENGTH), find_median(array, LENGTH));
+  char* format_string = "\n\nStatistics overview:\n\tMinimum: %d\n\tMaximum: %d\n\tMedian: %d\n\tMean: %d\n";
+  printf(format_string, find_minimum(array, LENGTH), find_maximum(array, LENGTH), find_median(array, LENGTH), find_mean(array, LENGTH));
 }
 
 void print_array(const unsigned char *array, const unsigned int LENGTH) {
@@ -73,9 +74,14 @@ unsigned char find_median(const unsigned char *array, const unsigned int LENGTH)
   return roundf((array[index_of_middle] + array[index_of_middle - 1]) / 2.0);
 }
 
-unsigned char find_mean(const unsigned char *array, const unsigned int LENGTH) {
-  // assuming the array is sorted from largest to smallest
-  return 0;
+unsigned short find_mean(const unsigned char *array, const unsigned int LENGTH) {
+  unsigned short sum;
+
+  for (unsigned int i = 0; i < LENGTH; i++) {
+    sum += array[i];
+  }
+
+  return roundf(sum / (float) LENGTH);
 }
 
 unsigned char find_maximum(const unsigned char *array, const unsigned int LENGTH) {

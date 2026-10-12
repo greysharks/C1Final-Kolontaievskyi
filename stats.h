@@ -71,7 +71,7 @@ unsigned char find_median(const unsigned char *array, const unsigned int LENGTH)
  * @return calculated median value.
  */
 
-unsigned char find_mean(const unsigned char *array, const unsigned int LENGTH);
+unsigned short find_mean(const unsigned char *array, const unsigned int LENGTH);
 
 /*
  * @brief Finds the mean value.
