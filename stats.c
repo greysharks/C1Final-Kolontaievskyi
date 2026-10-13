@@ -26,7 +26,6 @@
  *
  */
 
-#include <math.h>
 #include <stdio.h>
 #include "stats.h"
 
@@ -67,7 +66,15 @@ void print_statistics(unsigned char *array, const unsigned int LENGTH) {
 void print_array(const unsigned char *array, const unsigned int LENGTH) {
   // suppose the array's length is NxN,
   // then N is both number of rows and number of columns
-  const unsigned int N = (unsigned int) sqrt((float) LENGTH);
+  unsigned int N = LENGTH;
+
+  if (LENGTH % 7 == 0) N = 7;
+
+  else if (LENGTH % 5 == 0) N = 5;
+
+  else if (LENGTH % 3 == 0) N = 3;
+
+  else if (LENGTH % 2 == 0) N = 2;
 
   for (unsigned int i = 0; i < LENGTH; i++) {
     // use N as separator for rows
@@ -78,15 +85,16 @@ void print_array(const unsigned char *array, const unsigned int LENGTH) {
   }
 }
 
-unsigned char find_median(const unsigned char *array, const unsigned int LENGTH) {
-  // assuming the array is sorted from largest to smallest
+unsigned char find_median(unsigned char *array, const unsigned int LENGTH) {
+  sort_array(array, LENGTH);
+
   unsigned int index_of_middle = LENGTH / 2;
 
   if (LENGTH % 2 == 1) {
     return array[index_of_middle];
   }
 
-  return roundf((array[index_of_middle] + array[index_of_middle - 1]) / 2.0);
+  return (array[index_of_middle] + array[index_of_middle - 1]) / 2.0;
 }
 
 unsigned short find_mean(const unsigned char *array, const unsigned int LENGTH) {
@@ -96,17 +104,27 @@ unsigned short find_mean(const unsigned char *array, const unsigned int LENGTH) 
     sum += array[i];
   }
 
-  return roundf(sum / (float) LENGTH);
+  return sum / (float) LENGTH;
 }
 
 unsigned char find_maximum(const unsigned char *array, const unsigned int LENGTH) {
-  // assuming the array is sorted from largest to smallest
-  return array[0];
+  unsigned char maximum = array[0];
+
+  for (unsigned int i = 0; i < LENGTH; i++) {
+    if (array[i] > maximum) maximum = array[i];
+  }
+
+  return maximum;
 }
 
 unsigned char find_minimum(const unsigned char *array, const unsigned int LENGTH) {
-  // assuming the array is sorted from largest to smallest
-  return array[LENGTH - 1];
+  unsigned char minimum = array[LENGTH - 1];
+
+  for (unsigned int i = 0; i < LENGTH; i++) {
+    if (array[i] < minimum) minimum = array[i];
+  }
+
+  return minimum;
 }
 
 void sort_array(unsigned char *array, const unsigned int LENGTH) {

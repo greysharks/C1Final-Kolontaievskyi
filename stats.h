@@ -67,15 +67,13 @@ void print_array(const unsigned char *array, const unsigned int LENGTH);
  * @return Doesn't return any value.
  */
 
-unsigned char find_median(const unsigned char *array, const unsigned int LENGTH);
+unsigned char find_median(unsigned char *array, const unsigned int LENGTH);
 
 /*
  * @brief Finds the median value.
  *
- * Given a sorted array of data and its length,
- * returns the median value (when data set is
- * even, the median value is rounded to the
- * nearest integer).
+ * This function first sorts array of data,
+ * then calculates the median value.
  *
  * @param array An array of data.
  * @param LENGTH Length of a given array.
@@ -88,7 +86,7 @@ unsigned short find_mean(const unsigned char *array, const unsigned int LENGTH);
 /*
  * @brief Finds the mean value.
  *
- * Given a sorted array of data and its length,
+ * Given an array of data and its length,
  * returns the mean value.
  *
  * @param array An array of data.
@@ -102,7 +100,7 @@ unsigned char find_maximum(const unsigned char *array, const unsigned int LENGTH
 /*
  * @brief Finds the maximum value.
  *
- * Given a sorted array of data and its length,
+ * Given an array of data and its length,
  * returns the maximum value.
  *
  * @param array An array of data.
@@ -117,7 +115,7 @@ unsigned char find_minimum(const unsigned char *array, const unsigned int LENGTH
 /*
  * @brief Finds the minimum value.
  *
- * Given a sorted array of data and its length,
+ * Given an array of data and its length,
  * returns the minimum value.
  *
  * @param array An array of data.
