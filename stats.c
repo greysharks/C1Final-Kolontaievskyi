@@ -43,17 +43,25 @@ void main() {
 
   /* Other Variable Declarations Go Here */
   /* Statistics and Printing Functions Go Here */
+  printf("Sorted array:");
+  sort_array(test, SIZE);
+  print_array(test, SIZE);
+  printf("\n\nStatistics overview:");
   print_statistics(test, SIZE);
 }
 
 /* Add other Implementation File Code Here */
 
 void print_statistics(unsigned char *array, const unsigned int LENGTH) {
-  printf("Sorted array:");
-  sort_array(array, LENGTH);
-  print_array(array, LENGTH);
-  char* format_string = "\n\nStatistics overview:\n\tMinimum: %d\n\tMaximum: %d\n\tMedian: %d\n\tMean: %d\n";
-  printf(format_string, find_minimum(array, LENGTH), find_maximum(array, LENGTH), find_median(array, LENGTH), find_mean(array, LENGTH));
+  char* format_string = "\n\tMinimum: %d\n\tMaximum: %d\n\tMedian: %d\n\tMean: %d\n";
+
+  printf(
+    format_string,
+    find_minimum(array, LENGTH),
+    find_maximum(array, LENGTH),
+    find_median(array, LENGTH),
+    find_mean(array, LENGTH)
+  );
 }
 
 void print_array(const unsigned char *array, const unsigned int LENGTH) {
@@ -82,7 +90,7 @@ unsigned char find_median(const unsigned char *array, const unsigned int LENGTH)
 }
 
 unsigned short find_mean(const unsigned char *array, const unsigned int LENGTH) {
-  unsigned short sum;
+  unsigned short sum = 0;
 
   for (unsigned int i = 0; i < LENGTH; i++) {
     sum += array[i];

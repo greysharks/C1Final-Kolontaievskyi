@@ -22,7 +22,7 @@
  *   - find_maximum() finds maximum value inside data set
  *   - find_minimum() finds minimum value inside data set
  *   - find_mean() calculates mean value for the data set
- *   - find_medain() calculates median value for the data set.
+ *   - find_median() calculates median value for the data set.
  *
  * Lastly, there is sort_array() function that is reponsible for sorting
  * data set from largest to smallest value.
@@ -42,9 +42,8 @@ void print_statistics(unsigned char *array, const unsigned int LENGTH);
  * @brief Prints the statistics of an array.
  *
  * Given an array of data and its length, this
- * function sorts the array, then finds and
- * prints its statistics including minimum,
- * maximum, mean and median.
+ * function finds and prints its statistics
+ * including minimum, maximum, mean and median.
  *
  * @param array An array of data.
  * @param LENGTH Length of a given array.
