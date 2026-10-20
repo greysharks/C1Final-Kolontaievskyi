@@ -64,8 +64,7 @@ void print_statistics(unsigned char *array, const unsigned int LENGTH) {
 }
 
 void print_array(const unsigned char *array, const unsigned int LENGTH) {
-  // suppose the array's length is NxN,
-  // then N is both number of rows and number of columns
+#ifdef VERBOSE
   unsigned int N = LENGTH;
 
   if (LENGTH % 7 == 0) N = 7;
@@ -83,6 +82,7 @@ void print_array(const unsigned char *array, const unsigned int LENGTH) {
     }
     printf("%d\t", array[i]);
   }
+#endif
 }
 
 unsigned char find_median(unsigned char *array, const unsigned int LENGTH) {
