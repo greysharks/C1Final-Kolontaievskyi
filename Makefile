@@ -26,19 +26,21 @@ PLATFORM ?= HOST
 
 include sources.mk
 
+# Default variables for both platforms
 GENERAL = -Wall -Werror -g -O0
 CPPFLAGS = $(GENERAL) -D$(PLATFORM) $(INCLUDES)
 CFLAGS = $(CPPFLAGS) -std=c99
 LDFLAGS = -Wl,-Map=$(TARGET).map
 
-# Compiler Flags and Defines
-ifeq ($(PLATFORM),HOST)
-	CC = gcc
-	LD = ld
 
-	SIZE = size
-	OBJDUMP = objdump
-else
+# Default variables for HOST platform
+CC = gcc
+LD = ld
+SIZE = size
+OBJDUMP = objdump
+
+# Default variables for TARGET platfrom (MSP4)
+ifeq ($(PLATFORM),MSP432)
 	CC = arm-none-eabi-gcc
 	LD = arm-none-eabi-ld
 	ARMFLAGS = -march=armv7e-m -mfloat-abi=hard -mfpu=fpv4-sp-d16
@@ -47,14 +49,14 @@ else
 	CPU = cortex-m4
 	ARCH = thumb
 	SPECS = nosys.specs
-	LINKER_FILE = ../msp432p401r.lds
+	LINKER_FILE = msp432p401r.lds
 	LDFLAGS += -T $(LINKER_FILE)
 	CFLAGS += -mcpu=$(CPU) -m$(ARCH) --specs=$(SPECS) $(ARMFLAGS)
 	SIZE = arm-none-eabi-size
 	OBJDUMP = arm-none-eabi-objdump
 endif
 
-TARGET = c1m2
+TARGET = course1
 
 OBJS := $(SOURCES:.c=.o)
 DEPS := $(SOURCES:.c=.d)
@@ -76,9 +78,9 @@ compile-all: $(OBJS)
 
 .PHONY: build
 build: $(OBJS)
-	$(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) -o $(TARGET).out
-	$(SIZE) $(TARGET).out
+	$(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) -o $(SRC_PATH)$(TARGET).out
+	$(SIZE) $(SRC_PATH)$(TARGET).out
 
 .PHONY: clean
 clean:
-	rm -f *o *d *out *map *i *asm
+	rm -f $(SRC_PATH)/*.o $(SRC_PATH)/*.d $(SRC_PATH)/*.out $(SRC_PATH)/*.map $(SRC_PATH)/*.i $(SRC_PATH)/*.asm
