@@ -9,24 +9,23 @@
 #
 #*****************************************************************************
 
+SRC_PATH = ./src
+INCLUDE_PATH = ./include
+
+SOURCES = $(SRC_PATH)/memory.c \
+  $(SRC_PATH)/main.c \
+  $(SRC_PATH)/stats.c \
+  $(SRC_PATH)/data.c \
+  $(SRC_PATH)/course1.c
+
+INCLUDES = -I $(INCLUDE_PATH)/common
+
 # Add your Source files to this variable
-ifeq ($(PLATFORM),HOST)
-	SOURCES = memory.c main.c
-else
-	SOURCES = memory.c  \
-	  system_msp432p401r.c  \
-	  interrupts_msp432p401r_gcc.c  \
-	  main.c  \
-          startup_msp432p401r_gcc.c
-endif
+ifeq ($(PLATFORM),MSP432)
+	SOURCES += $(SRC_PATH)/system_msp432p401r.c  \
+	  $(SRC_PATH)/interrupts_msp432p401r_gcc.c  \
+          $(SRC_PATH)/startup_msp432p401r_gcc.c \
 
-# Add your include paths to this variable
-
-
-ifeq ($(PLATFORM),HOST)
-	INCLUDES = -I ../include/common
-else
-	INCLUDES = -I ../include/common \
-	  -I ../include/msp432 \
-	  -I ../include/CMSIS
+	INCLUDES += -I $(INCLUDE_PATH)/msp432 \
+	  -I $(INCLUDE_PATH)/CMSIS
 endif
