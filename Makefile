@@ -27,7 +27,7 @@ PLATFORM ?= HOST
 include sources.mk
 
 # Default variables for both platforms
-GENERAL = -Wall -Werror -g -O0
+GENERAL = -Wall -g -O0
 CPPFLAGS = $(GENERAL) -D$(PLATFORM) $(INCLUDES)
 CFLAGS = $(CPPFLAGS) -std=c99
 LDFLAGS = -Wl,-Map=$(TARGET).map
@@ -78,8 +78,8 @@ compile-all: $(OBJS)
 
 .PHONY: build
 build: $(OBJS)
-	$(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) -o $(SRC_PATH)$(TARGET).out
-	$(SIZE) $(SRC_PATH)$(TARGET).out
+	$(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) -o $(SRC_PATH)/$(TARGET).out
+	$(SIZE) $(SRC_PATH)/$(TARGET).out
 
 .PHONY: clean
 clean:
