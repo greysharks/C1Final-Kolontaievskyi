@@ -19,6 +19,10 @@
  * @date April 1 2017
  *
  */
+
+#include <stddef.h>
+#include <stdint.h>
+
 #ifndef __MEMORY_H__
 #define __MEMORY_H__
 
@@ -103,6 +107,19 @@ void clear_all(char * ptr, unsigned int size);
  *
  * @return dst Pointer to destination array of bytes
  */
+
+
+/*
+ * Added functions include my_memmove, my_memcopy,
+ * my_memset, my_memzero, my_reverse, reserve_words,
+ * free_words.
+ *
+ * @author Maskym Kolontaievskyi
+ * @date October 22 2026
+ *
+ */
+
+
 uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length);
 
 /**

@@ -48,6 +48,15 @@ void clear_all(char * ptr, unsigned int size){
   set_all(ptr, 0, size);
 }
 
+/*
+ * Added functions include my_memmove, my_memcopy,
+ * my_memset, my_memzero, my_reverse, reserve_words,
+ * free_words.
+ *
+ * @author Maskym Kolontaievskyi
+ * @date October 22 2026
+ *
+ */
 
 uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length) {}
 uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length) {}
