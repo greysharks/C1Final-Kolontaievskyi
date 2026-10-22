@@ -23,6 +23,14 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#ifndef BASE_16
+#define BASE_16 16
+#endif
+
+#ifndef BASE_10
+#define BASE_10 10
+#endif
+
 #ifndef __DATA_H__
 #define __DATA_H__
 
