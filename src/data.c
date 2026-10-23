@@ -51,8 +51,17 @@
 #define ASCII_LETTER_PREFIX 0x41
 #endif
 
+#ifndef true
+#define true 1
+#endif
+
+#ifndef false
+#define false 0
+#endif
+
 uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base) {
   uint8_t converted_length = 0;
+  int32_t start_adding_to_string = false;
 
   if (base == BASE_2) {
     int32_t next_bit = SIGN_BIT;
@@ -60,8 +69,16 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base) {
     // add digits between 2^31 and 2^0
     while (next_bit >= 0) {
       uint8_t converted_value = (uint8_t) ((((1 << next_bit) & data) >> next_bit) & 1);
-      *(ptr + converted_length) = ASCII_NUMBER_PREFIX + converted_value;
-      converted_length++;
+
+      if (converted_value != 0) {
+        start_adding_to_string = true;
+      }
+
+      if (start_adding_to_string == true) {
+        *(ptr + converted_length) = ASCII_NUMBER_PREFIX + converted_value;
+        converted_length++;
+      }
+
       next_bit--;
     }
   }
@@ -77,8 +94,16 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base) {
 
     while (next_divisor > 1) {
       uint8_t converted_value = (uint8_t) ((data % next_divisor - data % (next_divisor / 10)) / (next_divisor / 10));
-      *(ptr + converted_length) = ASCII_NUMBER_PREFIX + converted_value;
-      converted_length++;
+
+      if (converted_value != 0) {
+        start_adding_to_string = true;
+      }
+
+      if (start_adding_to_string == true) {
+        *(ptr + converted_length) = ASCII_NUMBER_PREFIX + converted_value;
+        converted_length++;
+      }
+
       next_divisor /= 10;
     }
   }
@@ -89,13 +114,21 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base) {
     // add digits between 16^7 and 16^1 to the string
     while (next_nibble >= 0) {
       uint8_t converted_value = (uint8_t) ((((0xF << next_nibble) & data) >> next_nibble) & 0xF);
-      if (converted_value < 10) { // A = 10
-        *(ptr + converted_length) = ASCII_NUMBER_PREFIX + converted_value;
+
+      if (converted_value != 0) {
+        start_adding_to_string = true;
       }
-      else {
-        *(ptr + converted_length) = ASCII_LETTER_PREFIX + (converted_value - 10);
+
+      if (start_adding_to_string == true) {
+        if (converted_value < 10) { // A = 10
+          *(ptr + converted_length) = ASCII_NUMBER_PREFIX + converted_value;
+        }
+        else {
+          *(ptr + converted_length) = ASCII_LETTER_PREFIX + (converted_value - 10);
+        }
+        converted_length++;
       }
-      converted_length++;
+
       next_nibble -= 4;
     }
   }
