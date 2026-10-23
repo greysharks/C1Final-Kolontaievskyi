@@ -22,8 +22,8 @@
 
 #include "data.h"
 
-#ifndef MAX_BASE_10_LENGTH
-#define MAX_BASE_10_LENGTH 11 // for -4_294_967_296 (0xFFFF_FFFF)
+#ifndef MAX_DIVISOR
+#define MAX_DIVISOR 10000000000
 #endif
 
 #ifndef SIGN_BIT
@@ -32,6 +32,13 @@
 
 #ifndef ASCII_NUMBER_PREFIX
 #define ASCII_NUMBER_PREFIX 0x30
+#endif
+
+#ifndef ASCII_LETTER_PREFIX
+#define ASCII_LETTER_PREFIX 0x41
+#endif
+
+
 
 uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base) {
   uint8_t converted_length = 0;
@@ -49,7 +56,20 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base) {
   }
 
   else if (base == BASE_10) {
+    if ((data & (1 << SIGN_BIT)) != 0) {
+      *ptr = (uint8_t) '-';
+      data = (~data) + 1; // use 2s-complement conversion
+      converted_length++;
+    }
 
+    long long next_divisor = MAX_DIVISOR;
+
+    while (next_divisor > 1) {
+      uint8_t converted_value = (uint8_t) ((data % next_divisor - data % (next_divisor / 10)) / (next_divisor / 10));
+      *(ptr + converted_length) = ASCII_NUMBER_PREFIX + converted_value;
+      converted_length++;
+      next_divisor /= 10;
+    }
   }
 
   else if (base == BASE_16) {
