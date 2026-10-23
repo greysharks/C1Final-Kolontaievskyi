@@ -37,6 +37,7 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base) {
   uint8_t converted_length = 0;
 
   if (base == BASE_2) {
+    // add digit at position 2^31 to the string
     if ((data & (1 << SIGN_BIT)) != 0) {
       *ptr = ASCII_NUMBER_PREFIX + (uint8_t) 1;
     }
@@ -48,6 +49,7 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base) {
 
     int32_t next_bit = SIGN_BIT - 1;
 
+    // add digits between 2^30 and 2^1
     while (next_bit > 0) {
       uint8_t converted_value = (uint8_t) (((1 << next_bit) & data) >> next_bit);
       *(ptr + converted_length) = ASCII_NUMBER_PREFIX + converted_value;
@@ -55,6 +57,7 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base) {
       next_bit--;
     }
 
+    // add digit at position 2^0 to the string
     *(ptr + converted_length) = ASCII_NUMBER_PREFIX + (uint8_t) (1 & data);
     converted_length++;
   }
@@ -64,7 +67,30 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base) {
   }
 
   else if (base == BASE_16) {
+    int32_t next_nibble = 28;
 
+    // add digits between 16^7 and 16^1 to the string
+    while (next_nibble > 0) {
+      uint8_t converted_value = (uint8_t) ((((0xF << next_nibble) & data) >> next_nibble) & 0xF);
+      if (converted_value < 10) {
+        *(ptr + converted_length) = ASCII_NUMBER_PREFIX + converted_value;
+      }
+      else {
+        *(ptr + converted_length) = ASCII_LETTER_PREFIX + (converted_value - 10);
+      }
+      converted_length++;
+      next_nibble -= 4;
+    }
+
+    // add digit at position 16^0 to the string
+    uint8_t converted_value = (uint8_t) (0xF & data);
+    if (converted_value < 10) {
+      *(ptr + converted_length = ASCII_NUMBER_PREFIX + converted_value;
+    }
+    else {
+      *(ptr + converted) = ASCII_LETTER_PREFIX + (converted_value - 10);
+    }
+    converted_length++;
   }
 
   *(ptr + converted_length) = (uint8_t) '\0';
