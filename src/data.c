@@ -22,6 +22,19 @@
 
 #include "data.h"
 
+
+#ifndef BASE_2
+#define BASE_2 2
+#endif
+
+#ifndef BASE_10
+#define BASE_10 10
+#endif
+
+#ifndef BASE_16
+#define BASE_16 16
+#endif
+
 #ifndef MAX_DIVISOR
 #define MAX_DIVISOR 10000000000
 #endif
@@ -38,8 +51,6 @@
 #define ASCII_LETTER_PREFIX 0x41
 #endif
 
-
-
 uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base) {
   uint8_t converted_length = 0;
 
@@ -47,7 +58,7 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base) {
     int32_t next_bit = SIGN_BIT;
 
     // add digits between 2^31 and 2^0
-    while (next_bit => 0) {
+    while (next_bit >= 0) {
       uint8_t converted_value = (uint8_t) ((((1 << next_bit) & data) >> next_bit) & 1);
       *(ptr + converted_length) = ASCII_NUMBER_PREFIX + converted_value;
       converted_length++;
@@ -76,7 +87,7 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base) {
     int32_t next_nibble = 28;
 
     // add digits between 16^7 and 16^1 to the string
-    while (next_nibble => 0) {
+    while (next_nibble >= 0) {
       uint8_t converted_value = (uint8_t) ((((0xF << next_nibble) & data) >> next_nibble) & 0xF);
       if (converted_value < 10) { // A = 10
         *(ptr + converted_length) = ASCII_NUMBER_PREFIX + converted_value;

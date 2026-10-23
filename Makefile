@@ -71,7 +71,7 @@ DEPS := $(SOURCES:.c=.d)
 	$(CC) -S $^ $(CFLAGS) -o $@
 
 $(TARGET).asm: build
-	$(OBJDUMP) -d $(TARGET).out > $(TARGET).asm
+	$(OBJDUMP) -d $(SRC_PATH)/$(TARGET).out > $(SRC_PATH)/$(TARGET).asm
 
 .PHONY: compile-all
 compile-all: $(OBJS)
@@ -83,4 +83,4 @@ build: $(OBJS)
 
 .PHONY: clean
 clean:
-	rm -f $(SRC_PATH)/*.o $(SRC_PATH)/*.d $(SRC_PATH)/*.out $(SRC_PATH)/*.map $(SRC_PATH)/*.i $(SRC_PATH)/*.asm
+	rm -f $(SRC_PATH)/*.o $(SRC_PATH)/*.d $(SRC_PATH)/*.out *.map $(SRC_PATH)/*.i $(SRC_PATH)/*.asm
