@@ -137,6 +137,20 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base) {
   return converted_length;
 }
 
+uint32_t pow_uint(uint8_t base, uint8_t power) {
+  if (power == 0) {
+    return 1;
+  }
+
+  uint32_t base_to_power = base;
+
+  for (uint8_t j = 1; j < power; j++) {
+    base_to_power *= base;
+  }
+
+  return base_to_power;
+}
+
 int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base) {
   int32_t result = 0;
 
@@ -159,6 +173,28 @@ int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base) {
       }
 
       result += (uint8_t) digit << ((digits - 1 - i) * 4);
+    }
+  }
+
+  else if (base == BASE_10) {
+    int32_t is_negative = false;
+
+    if (*ptr == '-') {
+      is_negative = true;
+    }
+
+    uint8_t step = 0;
+
+    if (is_negative == true) {
+      step++;
+    }
+
+    for (uint8_t i = step; i < digits + step; i++) {
+      result += (*(ptr + i) - ASCII_NUMBER_PREFIX) * pow_uint(10, digits - i);
+    }
+
+    if (is_negative == true) {
+      result = ~result + 1;
     }
   }
 
