@@ -27,7 +27,7 @@ PLATFORM ?= HOST
 include sources.mk
 
 # Default variables for both platforms
-GENERAL = -Wall -g -O0
+GENERAL = -Wall -Werror -g -O0
 CPPFLAGS = $(GENERAL) -D$(PLATFORM) $(INCLUDES)
 CFLAGS = $(CPPFLAGS) -std=c99
 LDFLAGS = -Wl,-Map=$(TARGET).map
