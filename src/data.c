@@ -120,11 +120,11 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base) {
       }
 
       if (start_adding_to_string == true) {
-        if (converted_value < 10) { // A = 10
+        if (converted_value < 0xA) { // A = 10
           *(ptr + converted_length) = ASCII_NUMBER_PREFIX + converted_value;
         }
         else {
-          *(ptr + converted_length) = ASCII_LETTER_PREFIX + (converted_value - 10);
+          *(ptr + converted_length) = ASCII_LETTER_PREFIX + (converted_value - 0xA);
         }
         converted_length++;
       }
@@ -139,6 +139,28 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base) {
 
 int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base) {
   int32_t result = 0;
+
+  if (base == BASE_2) {
+    for (uint8_t i = 0; i < digits; i++) {
+      uint8_t digit = *(ptr + i) - ASCII_NUMBER_PREFIX;
+      result += digit << (digits - 1 - i);
+    }
+  }
+
+  else if (base == BASE_16) {
+    for (uint8_t i = 0; i < digits; i++) {
+      uint8_t digit = *(ptr + i);
+
+      if (digit < ASCII_LETTER_PREFIX) {
+        digit -= ASCII_NUMBER_PREFIX;
+      }
+      else {
+        digit = digit - ASCII_LETTER_PREFIX + 0xA;
+      }
+
+      result += (uint8_t) digit << ((digits - 1 - i) * 4);
+    }
+  }
 
   return result;
 }
