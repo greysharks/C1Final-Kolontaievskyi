@@ -60,12 +60,15 @@ void clear_all(char * ptr, unsigned int size){
  */
 
 uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length) {
+
+  // move data from start if destination has lower or equal address
   if (dst <= src) {
     for (size_t i = 0; i < length; i++) {
       *(dst + i) = *(src + i);
     }
   }
 
+  // move data from end if destination has higher address
   else {
     for (size_t i = length; i > 0; i--) {
       *(dst + i - 1) = *(src + i - 1);
@@ -76,6 +79,8 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length) {
 }
 
 uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length) {
+
+  // copy data with loss when source overlaps with destination
   for (size_t i = 0; i < length; i++) {
     *(dst + i) = *(src + i);
   }
@@ -84,6 +89,8 @@ uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length) {
 }
 
 uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value) {
+
+  // set all memory locations to same value
   for (size_t i = 0; i < length; i++) {
     *(src + i) = value;
   }
@@ -92,6 +99,8 @@ uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value) {
 }
 
 uint8_t * my_memzero(uint8_t * src, size_t length) {
+
+  // set all memory locations to zeros
   for (size_t i = 0; i < length; i++) {
     *(src + i) = 0;
   }
@@ -100,9 +109,17 @@ uint8_t * my_memzero(uint8_t * src, size_t length) {
 }
 
 uint8_t * my_reverse(uint8_t * src, size_t length) {
+
+  // swap all values that are symmetrical towards center
   for (size_t i = 0; i < length / 2; i++) {
+
+    // store combination of values (XOR) in first memory location
     *(src + i) ^= *(src + (length - 1 - i));
+
+    // get first value and store as second
     *(src + (length - 1 - i)) ^= *(src + i);
+
+    // get second value and store as first
     *(src + i) ^= *(src + (length - 1 - i));
   }
 
