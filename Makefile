@@ -23,6 +23,8 @@
 #------------------------------------------------------------------------------
 # Platform Overrides
 PLATFORM ?= HOST
+COURSE1 ?= 0
+VERBOSE ?= 0
 
 include sources.mk
 
@@ -32,6 +34,13 @@ CPPFLAGS = $(GENERAL) -D$(PLATFORM) $(INCLUDES)
 CFLAGS = $(CPPFLAGS) -std=c99
 LDFLAGS = -Wl,-Map=$(TARGET).map
 
+ifeq ($(COURSE1), 1)
+	CFLAGS += -DCOURSE1
+endif
+
+ifeq ($(VERBOSE), 1)
+	CFLAGS += -DVERBOSE
+endif
 
 # Default variables for HOST platform
 CC = gcc
