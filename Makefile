@@ -23,24 +23,14 @@
 #------------------------------------------------------------------------------
 # Platform Overrides
 PLATFORM ?= HOST
-COURSE1 ?= 0
-VERBOSE ?= 0
 
 include sources.mk
 
 # Default variables for both platforms
 GENERAL = -Wall -Werror -g -O0
 CPPFLAGS = $(GENERAL) -D$(PLATFORM) $(INCLUDES)
-CFLAGS = $(CPPFLAGS) -std=c99
+CFLAGS = $(CPPFLAGS) -std=c99 -DCOURSE1 -DVERBOSE
 LDFLAGS = -Wl,-Map=$(TARGET).map
-
-ifeq ($(COURSE1), 1)
-	CFLAGS += -DCOURSE1
-endif
-
-ifeq ($(VERBOSE), 1)
-	CFLAGS += -DVERBOSE
-endif
 
 # Default variables for HOST platform
 CC = gcc
@@ -87,9 +77,9 @@ compile-all: $(OBJS)
 
 .PHONY: build
 build: $(OBJS)
-	$(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) -o $(SRC_PATH)/$(TARGET).out
-	$(SIZE) $(SRC_PATH)/$(TARGET).out
+	$(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) -o $(TARGET).out
+	$(SIZE) $(TARGET).out
 
 .PHONY: clean
 clean:
-	rm -f $(SRC_PATH)/*.o $(SRC_PATH)/*.d $(SRC_PATH)/*.out *.map $(SRC_PATH)/*.i $(SRC_PATH)/*.asm
+	rm -f $(SRC_PATH)/*.o $(SRC_PATH)/*.d *.out *.map $(SRC_PATH)/*.i $(SRC_PATH)/*.asm
