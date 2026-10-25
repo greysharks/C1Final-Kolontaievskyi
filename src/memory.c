@@ -60,15 +60,15 @@ void clear_all(char * ptr, unsigned int size){
  */
 
 uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length) {
-  if (dst < src) {
+  if (dst <= src) {
     for (size_t i = 0; i < length; i++) {
       *(dst + i) = *(src + i);
     }
   }
 
   else {
-    for (size_t i = length - 1; i >= 0; i--) {
-      *(dst + i) = *(src + i);
+    for (size_t i = length; i > 0; i--) {
+      *(dst + i - 1) = *(src + i - 1);
     }
   }
 

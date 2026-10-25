@@ -190,7 +190,7 @@ int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base) {
     }
 
     for (uint8_t i = step; i < digits + step; i++) {
-      result += (*(ptr + i) - ASCII_NUMBER_PREFIX) * pow_uint(10, digits - i);
+      result += (*(ptr + i) - ASCII_NUMBER_PREFIX) * pow_uint(10, digits + step - 1 - i);
     }
 
     if (is_negative == true) {
